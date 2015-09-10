@@ -1,0 +1,25 @@
+<template name="layout">
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div>
+          <h1 id="branding"><a href="{{pathFor 'home'}}">Crafty</a></h1>
+          <ul class="nav nav-pills">
+            <li><a href="{{pathFor 'sizes'}}">Sizes</a></li>
+            <li><a href="{{pathFor 'products'}}">Products</a></li>
+            <li><a href="{{pathFor 'inventory'}}">Inventory</a></li>
+            <li><a href="{{pathFor 'materials'}}">Raw Materials</a></li>
+            <li><a href="{{pathFor 'suppliers'}}">Suppliers</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        {{> yield}}
+      </div>
+    </div>
+  </div>
+</body>
+</template>

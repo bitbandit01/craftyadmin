@@ -1,0 +1,15 @@
+<template name="suppliers">
+  <h1>Suppliers</h1>
+  {{#each this}}
+  	<a href="{{pathFor 'aSupplier' _id}}">{{name}}</a><br />
+  {{/each}}
+  
+  <hr />
+  {{> newSupplierForm }}
+</template>
+
+
+<template name="newSupplierForm">
+  <h2>Create New Supplier</h2>
+  {{> quickForm collection="Suppliers" id="newSupplierForm" type="insert" }}
+</template>

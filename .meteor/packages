@@ -1,0 +1,25 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-platform
+iron:router
+fourseven:scss
+anti:fake
+dburles:factory
+random
+meteorhacks:ssr
+msavin:mongol
+aldeed:autoform
+aldeed:collection2
+twbs:bootstrap
+templates:tabs
+meteorhacks:npm
+
+
+npm-container
+mrt:moment
+sanjo:jasmine
+velocity:html-reporter

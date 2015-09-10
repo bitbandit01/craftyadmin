@@ -1,0 +1,124 @@
+<template name="product"> 
+
+  <h1>{{name}}</h1>
+  <h4>{{code}}</h4>
+  
+  <div class="well">
+      <p>CONTAINS 
+      {{ allergenList }}
+      </p>
+      <p> 
+      {{#each hcodes}}
+        {{#with hCodeCode this}}{{code}} - {{description}}<br />{{/with}}
+      {{/each}}
+      </p>
+      <p> 
+      {{#each pictograms}}
+        {{#with pictogramImg this}}<img src="{{src}}" width="30" /> {{/with}}
+      {{/each}}
+      </p>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12">
+    {{#basicTabs name="" tabs=tabs}}
+
+      {{#tabContent slug="basicInfo"}}
+        <h2>Basic Information</h2>
+        {{> quickForm collection="Products" doc=.. type="update" id="editProductForm" buttonContent="Save" }}
+      {{/tabContent}}
+
+      {{#tabContent slug="allergens"}}
+        {{> allergens }}
+      {{/tabContent}}
+
+      {{#tabContent slug="hcodes"}}
+        {{> hcodes }}
+      {{/tabContent}}
+
+      {{#tabContent slug="pcodes"}}
+        <h2>P-Codes</h2>
+      {{/tabContent}}
+
+      {{#tabContent slug="pictograms"}}
+        {{> pictograms }}
+      {{/tabContent}}
+
+    {{/basicTabs}}
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-12">
+      {{> productInventory }}
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-12">
+      {{> productFormulation }}
+    </div>
+  </div>
+</template>
+
+<template name="allergens">
+  <h3>Allergens</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <form id="allergens-form">
+        {{#each allergens}}
+        <div class="col-md-6">
+          <input type="checkbox" name="allergens[]" value="{{_id}}" {{isChecked _id ../..}} />
+          <label for="allergens[]">{{name}}</label>
+        </div>
+        {{/each}}
+      </form>
+    </div>  
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <a href="#" class="btn btn-primary">Save</a>
+    </div>
+  </div>
+</template>
+
+<template name="hcodes">
+  <h3>Health & Safety</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <form id="hcodes-form">
+      {{#each hcodes}}
+        <div class="col-md-6">
+          <input type="checkbox" name="hcodes[]" value="{{_id}}" {{isChecked _id ../..}} />
+          <label for="{{_id}}">{{code}} - {{description}}</label>
+        </div>
+      {{/each}}
+      </form>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-12">
+      <a href="#" class="btn btn-primary">Save</a>
+    </div>
+  </div>
+</template>
+
+<template name="pictograms">
+  <h3>Pictograms</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <form id="pictograms-form">
+      {{#each pictograms}}
+        <label class="checkbox-inline" for="{{_id}}" style="display:inline-block; text-align:center; margin-bottom: 16px;"><img src="{{src}}" width="80">
+          <input type="checkbox" name="pictograms[]" value="{{_id}}" {{isChecked _id ../..}} />
+        </label>
+      {{/each}}
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <a href="#" class="btn btn-primary">Save</a>
+    </div>
+  </div>
+</template>

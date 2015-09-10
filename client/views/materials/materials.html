@@ -1,0 +1,28 @@
+<template name="materials">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this}}
+        <tr>
+          <td><a href="{{pathFor 'aMaterial' }}">{{name}}</a></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  
+    {{> addMaterialForm }}
+</template>
+
+<template name="addMaterialForm">
+  <h3>Add Material</h3>
+  {{#autoForm collection="Materials" id="insertMaterialForm" type="insert" validation="none" }}
+    {{> afQuickField name="name" }}
+    {{> afQuickField name="code" }}
+    {{> afQuickField name="suppliers" }}
+    <button type="submit" class="btn btn-primary">Save</button>
+  {{/autoForm}}
+</template>

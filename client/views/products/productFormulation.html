@@ -1,0 +1,36 @@
+<template name="productFormulation">
+  <h3>Formulation for 100Kg:</h3>
+  {{#with currentFormulation _id}}
+    {{> formulationTable }}
+    <h4>Created on: {{formatDate date}}</h4>
+  {{/with}}
+  <h3>Enter formulation for 100Kg:</h3>
+  {{#autoForm collection="Formulations" id="insertFormulationForm" type="insert" validation="none" }}
+    {{> afQuickField name="ingredients"}}
+    {{> afFieldInput type="hidden" name="product" value=_id }}
+    <button type="submit" class="btn btn-primary">Save</button>
+  {{/autoForm}}
+  <hr />
+  <h3>Formulation History:</h3>
+  {{#each previousFormulations _id}}
+    <h4>Created: {{formatDate date}}</h4>
+    {{> formulationTable }}
+  {{/each}}
+</template>
+
+<template name="formulationTable">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Ingredient</th><th>Qty</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each ingredients }}
+        <tr>
+          <td>{{name}}</td><td>{{qty}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</template>
