@@ -1,12 +1,12 @@
-  Template.products.helpers({
+Template.products.onCreated(function(){
+  var self = this;
+  self.autorun(function() {
+     self.subscribe('Products');
+  });
+});
+
+Template.products.helpers({
     products: function () {
       return Products.find().fetch();
-    }
-  });
-
-  Template.products.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
+    },
+});

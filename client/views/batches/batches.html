@@ -1,0 +1,25 @@
+<template name="batches">
+  <h1>Batches</h1>
+  {{#if Template.subscriptionsReady }}
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-bordered table-striped products-table">
+          <thead>
+            <tr>
+              <th>Batch No.</th><th>Product</th><th>Started</th><th>Status</th><th>Remaining</th>
+            </tr>
+          </thead>
+          <tbody>
+          {{#each batches}}
+            <tr>
+              <td><a href="{{pathFor 'batch' id=_id }}">{{batchNo}}</a></td><td>{{productName product}}</td><td>{{startTime}}</td><td>{{status}}</td><td>{{remaining}}</td>
+            </tr>
+          {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {{else}}
+    {{> loading }}
+  {{/if}}
+</template>

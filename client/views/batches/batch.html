@@ -1,0 +1,103 @@
+<template name="batch">
+    {{#if Template.subscriptionsReady }}
+        {{#with batch}}
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{productName product}}</h2>
+                    <h2>Batch: {{batchNo}}</h2>
+                    <h3>Status: {{status}}</h3>
+                    <h3>Started: {{startTime}}</h3>
+                    <h3>Completed: </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Batch Size: {{formatKg batchSize}}</h3>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Ingredient</th><th>Qty</th><th>Batch Numbers</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each ingredients }}
+                            <tr>
+                                <td>{{name}}</td><td>{{qty}}</td>
+                                <td>
+                                    {{#each batchNo}}
+                                        {{this}}<br />
+                                    {{/each}}
+                                </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    {{#autoForm type="update" doc=batch collection="Batches" id="updateBatchForm" }}
+                        {{> afQuickField name="status" options=statusOptions}}
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    {{/autoForm}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>QC Notes</h3>
+                    {{#each qcNotes}}
+                        {{text}} <small>- {{formatDate timestamp}}</small><br />
+                    {{/each}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Add Note</h3>
+                    {{> quickForm type="update-pushArray" doc=batch collection="Batches" scope="qcNotes" id="insertQcNote" validation=none }}
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Inventory</h2>
+                    <h3>Remaining: {{formatKg remaining}}</h3>
+
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Sku</th><th>Size</th><th>Qty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each inventory}}
+                            <tr>
+                               <td>{{sku}}</td><td>{{description}}</td><td>{{qty}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {{/with}}
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Create Inventory</h3>
+                    <label for="size" class="control-label">Size: </label>
+                    <form id="assignStockForm">
+                        <select name="size" class="form-control">
+                            {{#each productSizes batch.product}}
+                                <option value="{{value}}">{{label}}</option>
+                            {{/each}}
+                        </select>
+                        <label for="qty" class="control-label">
+                            Qty:
+                            <input type="text" name="qty" class="form-control" />
+                        </label>
+                        <button class="btn btn-primary">Assign Stock</button>
+                    </form>
+                </div>
+            </div>
+    {{else}}
+        {{> loading}}
+    {{/if}}
+</template>

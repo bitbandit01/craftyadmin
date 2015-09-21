@@ -1,18 +1,22 @@
 <template name="materials">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Product Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each this}}
-        <tr>
-          <td><a href="{{pathFor 'aMaterial' }}">{{name}}</a></td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
+  {{#if Template.subscriptionsReady }}
+    {{#with materials}}
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each this}}
+          <tr>
+            <td><a href="{{pathFor 'aMaterial' id=_id }}">{{name}}</a></td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+     {{/with}}
+  {{/if}}
   
     {{> addMaterialForm }}
 </template>

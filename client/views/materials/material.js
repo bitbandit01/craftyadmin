@@ -1,3 +1,16 @@
+Template.material.onCreated(function(){
+  var self = this;
+  self.autorun(function() {
+    self.subscribe('Materials');
+    self.subscribe('Sizes');
+    self.subscribe('Allergens');
+    self.subscribe('HCodes');
+    self.subscribe('Pictograms');
+    self.subscribe('Inventory');
+    self.subscribe('Suppliers');
+  });
+});
+
 ReactiveTabs.createInterface({
   template: 'basicTabs',
   onChange: function (slug, template) {
@@ -7,13 +20,18 @@ ReactiveTabs.createInterface({
 });
 
 Template.material.helpers({
+    material : function() {
+      var id = FlowRouter.getParam("id");
+      return Materials.findOne(id);
+    },
     allergenList : function() {
       if(this.allergens.length === 0){
         return 'No Allergens';
       }
       else {
         var string = '';
-        _.each(this.allergens, function(id){
+        var material = Materials.findOne(FlowRouter.getParam("id"));
+        _.each(material.allergens, function(id){
           var record = Allergens.findOne({_id: id});
           string += record.name + ', ';
         });
@@ -60,22 +78,22 @@ Template.materialAllergens.helpers({
         }
         return result;
     },
-    isChecked : function(id, parentContext){
-        return _.contains(parentContext.allergens, id) ? "checked" : '';
+    isChecked : function(id){
+        var material = Materials.findOne(FlowRouter.getParam("id"));
+        return _.contains(material.allergens, id) ? "checked" : '';
     }
 });
 
 Template.materialAllergens.events({
     'click a' : function(event){
-        event.preventDefault();
-        console.log('click');
+        event.preventDefault();  
         var checked = [];
         //get the values of the checked options and add to the array
         $.each($('input[name="allergens[]"]:checked'), function(){
           checked.push($(this).val());
         });
         //Replace the mongo array with the new one
-        Materials.update({_id: Template.parentData()._id}, {$set : {'allergens': checked}});
+        Materials.update({_id: FlowRouter.getParam("id")}, {$set : {'allergens': checked}});
     }
 }); 
 
@@ -84,7 +102,8 @@ Template.materialHcodes.helpers({
         return HCodes.find().fetch();
     },
     isChecked : function(id, parentContext){
-        return _.contains(parentContext.hcodes, id) ? "checked" : '';
+        var material = Materials.findOne(FlowRouter.getParam("id"));
+        return _.contains(material.hcodes, id) ? "checked" : '';
     }
 });
 
@@ -97,7 +116,7 @@ Template.materialHcodes.events({
           checked.push($(this).val());
         });
         //Replace the mongo array with the new one
-        Materials.update({_id: Template.parentData()._id}, {$set : {'hcodes': checked}});
+        Materials.update({_id: FlowRouter.getParam("id")}, {$set : {'hcodes': checked}});
     }
 }); 
 
@@ -106,7 +125,8 @@ Template.materialPictograms.helpers({
         return Pictograms.find().fetch();
     },
     isChecked : function(id, parentContext){
-        return _.contains(parentContext.pictograms, id) ? "checked" : '';
+        var material = Materials.findOne(FlowRouter.getParam("id"));
+        return _.contains(material.pictograms, id) ? "checked" : '';
     }
 });
 
@@ -119,6 +139,6 @@ Template.materialPictograms.events({
           checked.push($(this).val());
         });
         //Replace the mongo array with the new one
-        Materials.update({_id: Template.parentData()._id}, {$set: {'pictograms': checked}});
+        Materials.update({_id: FlowRouter.getParam("id")}, {$set: {'pictograms': checked}});
     }
 }); 

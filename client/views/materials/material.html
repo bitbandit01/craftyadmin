@@ -1,68 +1,73 @@
 <template name="material"> 
+  {{#if Template.subscriptionsReady }}
+    {{# with material}}
+      <h1>{{name}}</h1>
+      <h4>{{code}}</h4>
 
-  <h1>{{name}}</h1>
-  <h4>{{code}}</h4>
-  
-  <div class="well">
-      <p>CONTAINS 
-      {{ allergenList }}
-      </p>
-      <p> 
-      {{#each hcodes}}
-        {{#with hCodeCode this}}{{code}} - {{description}}<br />{{/with}}
-      {{/each}}
-      </p>
-      <p> 
-      {{#each pictograms}}
-        {{#with pictogramImg this}}<img src="{{src}}" width="30" /> {{/with}}
-      {{/each}}
-      </p>
-  </div>
-  
-  <div class="row">
-    <div class="col-md-12">
-    {{#basicTabs name="" tabs=tabs}}
+      <div class="well">
+          <p>CONTAINS 
+          {{ allergenList }}
+          </p>
+          <p> 
+          {{#each hcodes}}
+            {{#with hCodeCode this}}{{code}} - {{description}}<br />{{/with}}
+          {{/each}}
+          </p>
+          <p> 
+          {{#each pictograms}}
+            {{#with pictogramImg this}}<img src="{{src}}" width="30" /> {{/with}}
+          {{/each}}
+          </p>
+      </div>
 
-      {{#tabContent slug="basicInfo"}}
-        <h2>Basic Information</h2>
-        {{#autoForm collection="Materials" doc=.. id="updateMaterialForm" type="update" validation="none" }}
-          {{> afQuickField name="name" }}
-          {{> afQuickField name="code" }}
-          <button type="submit" class="btn btn-primary">Save</button>
-        {{/autoForm}}
-      {{/tabContent}}
+      <div class="row">
+        <div class="col-md-12">
+        {{#basicTabs name="" tabs=tabs}}
 
-      {{#tabContent slug="allergens"}}
-        {{> materialAllergens }}
-      {{/tabContent}}
+          {{#tabContent slug="basicInfo"}}
+            <h2>Basic Information</h2>
+            {{#autoForm collection="Materials" doc=.. id="updateMaterialForm" type="update" validation="none" }}
+              {{> afQuickField name="name" }}
+              {{> afQuickField name="code" }}
+              <button type="submit" class="btn btn-primary">Save</button>
+            {{/autoForm}}
+          {{/tabContent}}
 
-      {{#tabContent slug="hcodes"}}
-        {{> materialHcodes }}
-      {{/tabContent}}
+          {{#tabContent slug="allergens"}}
+            {{> materialAllergens }}
+          {{/tabContent}}
 
-      {{#tabContent slug="pcodes"}}
-        <h2>P-Codes</h2>
-      {{/tabContent}}
+          {{#tabContent slug="hcodes"}}
+            {{> materialHcodes }}
+          {{/tabContent}}
 
-      {{#tabContent slug="pictograms"}}
-        {{> materialPictograms }}
-      {{/tabContent}}
+          {{#tabContent slug="pcodes"}}
+            <h2>P-Codes</h2>
+          {{/tabContent}}
 
-    {{/basicTabs}}
-    </div>
-  </div>
-  <hr />
-  <div class="row">
-    <div class="col-md-12">
-      {{> materialSuppliers }}
-    </div>
-  </div>
-  <hr />
-  <div class="row">
-    <div class="col-md-12">
-      {{> materialInventory }}
-    </div>
-  </div>
+          {{#tabContent slug="pictograms"}}
+            {{> materialPictograms }}
+          {{/tabContent}}
+
+        {{/basicTabs}}
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          {{> materialSuppliers }}
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          {{> materialInventory }}
+        </div>
+      </div>
+    {{/with}}
+  {{else}}
+    {{> loading}}
+  {{/if}}
 </template>
 
 <template name="materialAllergens">

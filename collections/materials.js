@@ -12,6 +12,7 @@ Schema.MaterialSchema = new SimpleSchema({
   },
   inventory : {
     type : Number,
+    decimal: true,
     defaultValue : 0,
     min : 0
   },
@@ -128,3 +129,12 @@ Schema.MaterialSchema = new SimpleSchema({
 });
 
 Materials.attachSchema(Schema.MaterialSchema);
+
+Materials.allow({
+  insert : function(){
+    return true;
+  },
+  update : function(){
+    return true;
+  }
+});

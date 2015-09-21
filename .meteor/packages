@@ -24,3 +24,10 @@ sanjo:jasmine
 velocity:html-reporter
 kadira:flow-router
 kadira:blaze-layout
+arillo:flow-router-helpers
+sacha:spin
+accounts-base
+accounts-ui
+accounts-password
+velocity:helpers
+reactive-var

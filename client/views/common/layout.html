@@ -11,13 +11,16 @@
             <li><a href="{{pathFor 'inventory'}}">Inventory</a></li>
             <li><a href="{{pathFor 'materials'}}">Raw Materials</a></li>
             <li><a href="{{pathFor 'suppliers'}}">Suppliers</a></li>
+            <li><a href="{{pathFor 'batches'}}">Batches</a></li>
+            <li><a href="{{pathFor 'newBatch' }}">New Batch</a></li>
           </ul>
         </div>
+        {{> loginButtons c}}
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
-        {{> yield}}
+         {{>Template.dynamic template=content}}
       </div>
     </div>
   </div>

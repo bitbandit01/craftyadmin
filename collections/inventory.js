@@ -38,3 +38,12 @@ Inventory.attachSchema(new SimpleSchema({
      defaultValue : 0
    }
 }));
+
+Inventory.allow({
+  insert : function(){
+    return true;
+  },
+  update : function(){
+    return true;
+  }
+});

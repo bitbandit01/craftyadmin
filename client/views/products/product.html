@@ -1,64 +1,69 @@
 <template name="product"> 
+  {{#if Template.subscriptionsReady }}
+    {{# with product}} 
+      <h1>{{name}}</h1>
+      <h4>{{code}}</h4>
 
-  <h1>{{name}}</h1>
-  <h4>{{code}}</h4>
-  
-  <div class="well">
-      <p>CONTAINS 
-      {{ allergenList }}
-      </p>
-      <p> 
-      {{#each hcodes}}
-        {{#with hCodeCode this}}{{code}} - {{description}}<br />{{/with}}
-      {{/each}}
-      </p>
-      <p> 
-      {{#each pictograms}}
-        {{#with pictogramImg this}}<img src="{{src}}" width="30" /> {{/with}}
-      {{/each}}
-      </p>
-  </div>
-  
-  <div class="row">
-    <div class="col-md-12">
-    {{#basicTabs name="" tabs=tabs}}
+      <div class="well">
+          <p>CONTAINS 
+          {{ allergenList }}
+          </p>
+          <p> 
+          {{#each hcodes}}
+            {{#with hCodeCode this}}{{code}} - {{description}}<br />{{/with}}
+          {{/each}}
+          </p>
+          <p> 
+          {{#each pictograms}}
+            {{#with pictogramImg this}}<img src="{{src}}" width="30" /> {{/with}}
+          {{/each}}
+          </p>
+      </div>
 
-      {{#tabContent slug="basicInfo"}}
-        <h2>Basic Information</h2>
-        {{> quickForm collection="Products" doc=.. type="update" id="editProductForm" buttonContent="Save" }}
-      {{/tabContent}}
+      <div class="row">
+        <div class="col-md-12">
+        {{#basicTabs name="" tabs=tabs}}
 
-      {{#tabContent slug="allergens"}}
-        {{> allergens }}
-      {{/tabContent}}
+          {{#tabContent slug="basicInfo"}}
+            <h2>Basic Information</h2>
+            {{> quickForm collection="Products" doc=.. type="update" id="editProductForm" buttonContent="Save" }}
+          {{/tabContent}}
 
-      {{#tabContent slug="hcodes"}}
-        {{> hcodes }}
-      {{/tabContent}}
+          {{#tabContent slug="allergens"}}
+            {{> allergens }}
+          {{/tabContent}}
 
-      {{#tabContent slug="pcodes"}}
-        <h2>P-Codes</h2>
-      {{/tabContent}}
+          {{#tabContent slug="hcodes"}}
+            {{> hcodes }}
+          {{/tabContent}}
 
-      {{#tabContent slug="pictograms"}}
-        {{> pictograms }}
-      {{/tabContent}}
+          {{#tabContent slug="pcodes"}}
+            <h2>P-Codes</h2>
+          {{/tabContent}}
 
-    {{/basicTabs}}
-    </div>
-  </div>
-  <hr />
-  <div class="row">
-    <div class="col-md-12">
-      {{> productInventory }}
-    </div>
-  </div>
-  <hr />
-  <div class="row">
-    <div class="col-md-12">
-      {{> productFormulation }}
-    </div>
-  </div>
+          {{#tabContent slug="pictograms"}}
+            {{> pictograms }}
+          {{/tabContent}}
+
+        {{/basicTabs}}
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          {{> productInventory }}
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          {{> productFormulation }}
+        </div>
+      </div>
+    {{/with}}
+  {{else}}
+    {{> loading }}
+  {{/if}}
 </template>
 
 <template name="allergens">

@@ -68,3 +68,12 @@ Schema.supplierSchema = new SimpleSchema({
 });
 
 Suppliers.attachSchema(Schema.supplierSchema);
+
+Suppliers.allow({
+  insert : function(){
+    return true;
+  },
+  update : function(){
+    return true;
+  }
+});

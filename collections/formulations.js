@@ -59,4 +59,12 @@ formulationSchema = new SimpleSchema({
 });
 
 Formulations.attachSchema(formulationSchema);
-SimpleSchema.debug = true;
+
+Formulations.allow({
+  insert : function(){
+    return true;
+  },
+  update : function(){
+    return true;
+  }
+});

@@ -16,3 +16,12 @@ Sizes.attachSchema(new SimpleSchema({
     min : 0
   }
 }));
+
+Sizes.allow({
+  insert : function(){
+    return true;
+  },
+  update : function(){
+    return true;
+  }
+});

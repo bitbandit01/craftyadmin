@@ -1,3 +1,17 @@
+Template.product.onCreated(function(){
+  var self = this;
+  self.autorun(function() {
+    self.subscribe('Products');
+    self.subscribe('Sizes');
+    self.subscribe('Allergens');
+    self.subscribe('HCodes');
+    self.subscribe('Pictograms');
+    self.subscribe('Inventory');
+    self.subscribe('Formulations');
+    self.subscribe('Materials');
+  });
+});
+
 ReactiveTabs.createInterface({
   template: 'basicTabs',
   onChange: function (slug, template) {
@@ -7,13 +21,18 @@ ReactiveTabs.createInterface({
 });
 
 Template.product.helpers({
+    product : function() {
+      var id = FlowRouter.getParam("id");
+      return Products.findOne(id);
+    },
     allergenList : function() {
-      if(this.allergens.length === 0){
+      var product = Products.findOne(FlowRouter.getParam("id"));
+      if(!product.allergens || product.allergens.length === 0){
         return 'No Allergens';
       }
       else {
         var string = '';
-        _.each(this.allergens, function(id){
+        _.each(product.allergens, function(id){
           var record = Allergens.findOne({_id: id});
           string += record.name + ', ';
         });
@@ -60,8 +79,9 @@ Template.allergens.helpers({
         }
         return result;
     },
-    isChecked : function(id, parentContext){
-        return _.contains(parentContext.allergens, id) ? "checked" : '';
+    isChecked : function(id){
+        var product = Products.findOne(FlowRouter.getParam("id"));
+        return _.contains(product.allergens, id) ? "checked" : '';
     }
 });
 
@@ -74,7 +94,7 @@ Template.allergens.events({
           checked.push($(this).val());
         });
         //Replace the mongo array with the new one
-        Products.update({_id: Template.parentData()._id}, {$set : {'allergens': checked}});
+        Products.update({_id: FlowRouter.getParam("id")}, {$set : {'allergens': checked}});
     }
 }); 
 
@@ -83,7 +103,8 @@ Template.hcodes.helpers({
         return HCodes.find().fetch();
     },
     isChecked : function(id, parentContext){
-        return _.contains(parentContext.hcodes, id) ? "checked" : '';
+        var product = Products.findOne(FlowRouter.getParam("id"));
+        return _.contains(product.hcodes, id) ? "checked" : '';
     }
 });
 
@@ -96,7 +117,7 @@ Template.hcodes.events({
           checked.push($(this).val());
         });
         //Replace the mongo array with the new one
-        Products.update({_id: Template.parentData()._id}, {$set : {'hcodes': checked}});
+        Products.update({_id: FlowRouter.getParam("id")}, {$set : {'hcodes': checked}});
     }
 }); 
 
@@ -105,7 +126,8 @@ Template.pictograms.helpers({
         return Pictograms.find().fetch();
     },
     isChecked : function(id, parentContext){
-        return _.contains(parentContext.pictograms, id) ? "checked" : '';
+        var product = Products.findOne(FlowRouter.getParam("id"));
+        return _.contains(product.pictograms, id) ? "checked" : '';
     }
 });
 
@@ -118,6 +140,6 @@ Template.pictograms.events({
           checked.push($(this).val());
         });
         //Replace the mongo array with the new one
-        Products.update({_id: Template.parentData()._id}, {$set: {'pictograms': checked}});
+        Products.update({_id: FlowRouter.getParam("id")}, {$set: {'pictograms': checked}});
     }
 }); 

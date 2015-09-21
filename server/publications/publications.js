@@ -34,3 +34,7 @@ Meteor.publish('Suppliers', function(){
 Meteor.publish('Formulations', function(){
   return Formulations.find();
 });
+
+Meteor.publish('Batches', function(){
+  return Batches.find({}, {sort : {startTime : -1}});
+});

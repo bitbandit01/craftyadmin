@@ -1,0 +1,7 @@
+<template name="supplier">
+  {{#with supplier}}
+    <h1>{{name}}</h1>
+  {{/with}}
+  
+  {{> quickForm collection="Suppliers" doc=supplier id="editSupplierForm" type="update" }}
+</template>

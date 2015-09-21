@@ -1,0 +1,28 @@
+<template name="materialStocktake">
+    {{#if Template.subscriptionsReady }}
+        <h1>Inventory</h1>
+        <form name="materialStocktake" class="stocktake" method="POST" action="#">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                  <th>Material Name</th><th>In Stock (Kg)</th><th>Recorded</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each materials}}
+                    <tr>
+                      <td>{{name}}</td><td>{{formatKg inventory}}</td><td><input type="text" name="{{_id}}" /></td>
+                    </tr>
+                {{/each}}
+                <tr>
+                  <td colspan="3">
+                    <button class="btn btn-primary">Update Inventory</button>
+                  </td>
+                </tr>
+            </tbody>
+        </table>
+        </form>
+    {{else}}
+        {{> loading}}
+    {{/if}}
+</template>

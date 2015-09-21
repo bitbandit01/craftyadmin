@@ -1,0 +1,21 @@
+<template name="inventory">
+    {{#if Template.subscriptionsReady }}
+        <h1>Inventory</h1>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Product Name</th><th>Size</th><th>In Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each inventory}}
+                    <tr>
+                        <td>{{product.name}}</td><td>{{size.description}}</td><td>{{inStock}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+        {{> loading}}
+    {{/if}}
+</template>
