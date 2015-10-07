@@ -31,3 +31,7 @@ accounts-ui
 accounts-password
 velocity:helpers
 reactive-var
+percolate:synced-cron
+kadira:debug
+peppelg:bootstrap-3-modal
+osv:mongo-counter

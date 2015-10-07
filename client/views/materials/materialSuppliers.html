@@ -16,19 +16,14 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th>Unit</th><th>Min qty</th><th>Price</th>
+                    <th>Unit</th><th>Units Per Pack</th><th>Min Order Qty</th>
                 </tr>
               </thead>
               <tbody>
                 {{#each sizes}}
                   <tr>
-                    <td>{{description}}</td><td>1</td><td>&pound;{{price}}</td>
+                      <td>{{description}}</td><td>{{units}}</td><td>{{minQty}}</td>
                   </tr>
-                   {{#each priceBreaks }}
-                     <tr>
-                       <td>&nbsp;</td><td>{{qty}}</td><td>&pound;{{price}}</td>
-                     </tr>
-                   {{/each}}
                 {{/each}}
               </tbody>
             </table>

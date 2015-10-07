@@ -1,8 +1,41 @@
 Suppliers = new Meteor.Collection('suppliers');
 
-var Schema = {};
+Schema.AddressSchema = new SimpleSchema({
+  description : {
+    type : String,
+  },
+  line1 : {
+    type : String,
+  },
+  line2 : {
+    type : String,
+    optional : true
+  },
+  line3 : {
+    type : String,
+    optional : true
+  },
+  town : {
+    type : String
+  },
+  county : {
+    type : String,
+    optional : true
+  },
+  postcode : {
+    type : String,
+  },
+  country : {
+    type : String,
+    allowedValues : ["United Kingdom", "Ireland"]
+  },
+  telephone : {
+    type : String,
+    optional : true
+  }
+});
 
-Schema.supplierSchema = new SimpleSchema({
+Schema.SupplierSchema = new SimpleSchema({
   name : {
     type: String
   },
@@ -30,44 +63,12 @@ Schema.supplierSchema = new SimpleSchema({
     optional : true
   },
   addresses : {
-    type : [Object],
-    optional : true
-  },
-  "addresses.$.description" : {
-    type : String,
-  },
-  "addresses.$.line1" : {
-    type : String,
-  },
-  "addresses.$.line2" : {
-    type : String,
-    optional : true
-  },
-  "addresses.$.line3" : {
-    type : String,
-    optional : true
-  },
-  "addresses.$.town" : {
-    type : String
-  },
-  "addresses.$.county" : {
-    type : String,
-    optional : true
-  },
-  "addresses.$.postcode" : {
-    type : String,
-  },
-  "addresses.$.country" : {
-    type : String,
-    allowedValues : ["United Kingdom", "Ireland"]
-  },
-  "addresses.$.telephone" : {
-    type : String,
+    type : [Schema.AddressSchema],
     optional : true
   }
 });
 
-Suppliers.attachSchema(Schema.supplierSchema);
+Suppliers.attachSchema(Schema.SupplierSchema);
 
 Suppliers.allow({
   insert : function(){

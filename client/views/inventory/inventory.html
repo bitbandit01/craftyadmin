@@ -4,13 +4,13 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Product Name</th><th>Size</th><th>In Stock</th>
+                    <th>Product Name</th><th>Size</th><th>In Stock</th><th>Available</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each inventory}}
                     <tr>
-                        <td>{{product.name}}</td><td>{{size.description}}</td><td>{{inStock}}</td>
+                        <td>{{product.name}}</td><td>{{size.description}}</td><td>{{inStock}}</td><td>{{available}}</td>
                     </tr>
                 {{/each}}
             </tbody>

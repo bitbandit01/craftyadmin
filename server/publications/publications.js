@@ -38,3 +38,7 @@ Meteor.publish('Formulations', function(){
 Meteor.publish('Batches', function(){
   return Batches.find({}, {sort : {startTime : -1}});
 });
+
+Meteor.publish('Purchases', function(){
+   return Purchases.find();
+});

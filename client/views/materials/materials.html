@@ -4,13 +4,13 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Product Name</th>
+            <th>Product Name</th><th>In Stock</th>
           </tr>
         </thead>
         <tbody>
           {{#each this}}
           <tr>
-            <td><a href="{{pathFor 'aMaterial' id=_id }}">{{name}}</a></td>
+            <td><a href="{{pathFor 'aMaterial' id=_id }}">{{name}}</a></td><td>{{formatKg inventory}}</td>
           </tr>
           {{/each}}
         </tbody>

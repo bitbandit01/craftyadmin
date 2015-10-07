@@ -1,7 +1,5 @@
 Batches = new Meteor.Collection('batches');
 
-Schema = {};
-
 Schema.BatchSchema = new SimpleSchema({
     product : {
         type : String

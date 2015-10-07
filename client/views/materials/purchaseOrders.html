@@ -1,0 +1,21 @@
+<template name="purchaseOrders">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Created On</th><th>Number</th><th>Supplier</th><th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each purchaseOrders}}
+                        <tr>
+                            <td>{{createdAt}}</td><td><a href="{{pathFor 'purchaseOrder' id=_id}}">{{number}}</a></td><td>{{supplier.name}}</td><td>{{status}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {{> newPurchaseOrder }}
+</template>

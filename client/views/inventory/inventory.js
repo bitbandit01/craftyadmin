@@ -8,5 +8,5 @@ Template.inventory.onCreated(function(){
 Template.inventory.helpers({
     inventory: function () {
         return Inventory.find().fetch();
-    },
+    }
 });

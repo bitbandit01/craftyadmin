@@ -254,6 +254,29 @@ Meteor.startup(function () {
               'country' : 'United Kingdom'
             }
           ]
+        },
+        {
+          'name' : 'Supplier Two',
+          'website' : 'http://www.google.com',
+          'telephone' : ['111888'],
+          'email' : [
+            {
+             'name' : 'A. Person',
+             'address' : 'a.person@suppliertwo.com',
+             'department' : 'Accounts'
+            }
+          ],
+          'addresses' : [
+            {
+              'description' : 'Billing',
+              'line1' : '99 A Street',
+              'line2' : 'The Lane',
+              'town' : 'Small Town',
+              'county' : 'Acounty',
+              'postcode' : 'AA10 2FF',
+              'country' : 'United Kingdom'
+            }
+          ]
         }
       ];
   
@@ -264,6 +287,7 @@ Meteor.startup(function () {
   }
   
       var supplierone = Suppliers.findOne({'name' : 'Supplier One'});
+      var suppliertwo = Suppliers.findOne({'name' : 'Supplier Two'});
       
       var materials = [
         {
@@ -282,7 +306,8 @@ Meteor.startup(function () {
                 {
                   '_id' : twentyfivekg._id,
                   'description' : twentyfivekg.description,
-                  'price' : '60.00',
+                  'units' : 1,
+                  'minQty' : 1
                 }
               ]
             }
@@ -294,7 +319,22 @@ Meteor.startup(function () {
           'allergens' : [],
           'hcodes' : [],
           'pictograms' : [],
-          'inventory' : 100000
+          'inventory' : 100000,
+          'suppliers' : [
+            {
+              '_id' : suppliertwo._id,
+              'name' : suppliertwo.name,
+              'code' : 'A5001',
+              'sizes' : [
+                {
+                  '_id' : fivekg._id,
+                  'description' : fivekg.description,
+                  'units' : 1,
+                  'minQty' : 4
+                }
+              ]
+            }
+          ]
         },
         {
           'name' : 'Material Three',
@@ -302,7 +342,22 @@ Meteor.startup(function () {
           'allergens' : [],
           'hcodes' : [],
           'pictograms' : [],
-          'inventory' : 89500
+          'inventory' : 89500,
+          'suppliers' : [
+            {
+              '_id' : supplierone._id,
+              'name' : supplierone.name,
+              'code' : 'A5001',
+              'sizes' : [
+                {
+                  '_id' : twentyfivekg._id,
+                  'description' : twentyfivekg.description,
+                  'units' : 1,
+                  'minQty' : 5
+                }
+              ]
+            }
+          ]
         }
       ];
   

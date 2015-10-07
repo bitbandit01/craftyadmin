@@ -1,0 +1,72 @@
+<template name="purchaseOrder">
+    {{#if Template.subscriptionsReady }}
+        {{#with purchase}}
+        <div class="row">
+            <div class="col-md-12">
+                <h3>{{number}}</h3>
+                <h3>{{createdAt}}</h3>
+                <h3>{{status}}</h3>
+                <h3>{{supplier.name}}</h3>
+                <p><a href="{{supplier.website}}" target="_new">{{supplier.website}}</a></p>
+                {{#each supplier.email}}
+                    <p>{{address}}</p>
+                {{/each}}
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Line Items</h3>
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                    {{#each lineItems}}
+                        <tr>
+                            <td>{{material.name}}</td><td>{{size.description}} x {{size.units}}</td><td>{{qty}}</td><td>{{status}}</td>
+                            <td>{{>lineStatus}}</td>
+                            <td><button class="btn btn-danger" id="deleteLineItem">Cancel</button></td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>    
+        </div>
+            
+        {{/with}}
+    {{else}}
+        {{> loading}}
+    {{/if}}
+</template>
+
+<template name="lineStatus">
+    <form name="lineStatus" method="POST" action="#">
+        <select name="lineStatus">
+            <option value="Pending">Pending</option>
+            <option value="Received">Received</option>
+            <option value="Defect">Defect</option>
+        </select>
+    </form>
+</template>
+
+<template name="confirmDelete">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirm Delete</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p><b>{{material.name}}</b> - ({{size.description}} x {{size.units}}) x {{qty}}</p>
+                    <p>Are your sure you want to delete this item?</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="confirm">Confirm</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</template>
