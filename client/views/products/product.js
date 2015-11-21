@@ -56,6 +56,7 @@ Template.product.helpers({
         { name: 'H-Codes', slug: 'hcodes' },
         { name: 'P-Codes', slug: 'pcodes' },
         { name: 'Pictograms', slug: 'pictograms' },
+        { name: 'Crafty Fragrances', slug: 'craftyFragrancesProduct'}  
       ];
     },
     activeTab: function () {

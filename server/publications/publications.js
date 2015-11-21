@@ -42,3 +42,7 @@ Meteor.publish('Batches', function(){
 Meteor.publish('Purchases', function(){
    return Purchases.find();
 });
+
+Meteor.publish('CraftyCart', function(){
+    return CraftyCart.find();
+});

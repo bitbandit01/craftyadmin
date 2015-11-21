@@ -36,7 +36,13 @@ Inventory.attachSchema(new SimpleSchema({
    available : {
      type : Number,
      defaultValue : 0
-   }
+   },
+   channels : {
+       type : Object
+   },
+   'channels.craftyFragrances' : {
+       type : Schema.craftyFragrancesInventory
+   } 
 }));
 
 Inventory.allow({

@@ -4,7 +4,6 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-platform
 fourseven:scss
 anti:fake
 dburles:factory
@@ -35,3 +34,16 @@ percolate:synced-cron
 kadira:debug
 peppelg:bootstrap-3-modal
 osv:mongo-counter
+standard-minifiers
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+jquery
+tracker
+logging
+reload
+ejson
+spacebars
+check

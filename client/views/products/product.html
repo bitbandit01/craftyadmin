@@ -44,6 +44,10 @@
           {{#tabContent slug="pictograms"}}
             {{> pictograms }}
           {{/tabContent}}
+            
+          {{#tabContent slug="craftyFragrancesProduct"}}
+            {{> craftyFragrancesProduct}}
+          {{/tabContent}}
 
         {{/basicTabs}}
         </div>
@@ -126,4 +130,13 @@
       <a href="#" class="btn btn-primary">Save</a>
     </div>
   </div>
+</template>
+
+<template name="craftyFragrancesProduct">
+    <h3>Crafty Fragrances Integration</h3>
+    <div class="row">
+      <div class="col-md-12">
+        {{> quickForm collection="Products" doc=.. scope="channels.craftyFragrances" type="update" id="editCraftyProductForm" buttonContent="Save" }}
+      </div>
+    </div>
 </template>

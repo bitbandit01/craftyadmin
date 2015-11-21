@@ -29,6 +29,16 @@ var productSchema = new SimpleSchema({
       omit : true
     }
   },
+  channels : {
+    type : Object,
+    autoform :{
+        omit : true
+    }
+  },
+  'channels.craftyFragrances' : {
+    type : Schema.craftyFragrancesProduct  
+  }
+    
   
 });
 

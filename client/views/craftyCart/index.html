@@ -1,0 +1,23 @@
+<template name="craftyCart">
+    {{#if Template.subscriptionsReady}}
+        <h1>Crafy Cart</h1>
+        <h2>Coupons</h2>
+        {{#each coupons}}
+            <b>{{coupon}}</b> : {{description}} - {{value}}%<br />
+        {{/each}}
+        <form name="addCoupon">
+            <label for="coupon">Coupon:
+                <input type="text" name="coupon" />
+            </label>
+            <label for="description">Description:
+                <input type="text" name="description" />
+            </label>
+            <label for="value">Value:
+                <input type="text" name="value" />
+            </label>
+            <button class="btn btn-primary">Add Coupon</button>
+        </form>
+    {{else}}
+        {{> loading}}
+    {{/if}}
+</template>    
