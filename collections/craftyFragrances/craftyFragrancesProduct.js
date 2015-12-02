@@ -5,6 +5,11 @@ Schema.craftyFragrancesProduct = new SimpleSchema({
    },
    name : {
        type : String,
+       autoValue : function(){
+           if(this.isInsert){
+               return this.field("name");
+           }
+       }
    },
    description : {
        type : String,
@@ -13,6 +18,9 @@ Schema.craftyFragrancesProduct = new SimpleSchema({
 });
 
 Schema.craftyFragrancesInventory = new SimpleSchema({
+   product : {
+       type : String
+   },
    available : {
        type : Boolean,
        defaultValue : false

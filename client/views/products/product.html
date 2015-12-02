@@ -136,7 +136,28 @@
     <h3>Crafty Fragrances Integration</h3>
     <div class="row">
       <div class="col-md-12">
-        {{> quickForm collection="Products" doc=.. scope="channels.craftyFragrances" type="update" id="editCraftyProductForm" buttonContent="Save" }}
+        {{> craftyFragrancesProductForm }}
       </div>
+    </div>
+    <h4>Variations</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>SKU</th><th>Size</th><th>Price</th><th>Make Available?</th><th>Save</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each variations}}
+                    <tr>
+                        <td>{{sku}}</td><td>{{size.description}}</td><td><input type="text" name="price" value="{{formatMoney channels.craftyFragrances.price}}" /></td>
+                        <td><input name="available" type="checkbox" value="available" {{variationAvailable}} /></td>
+                        <td><button class="btn btn-primary" id="updateVariation">Save</button></td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>

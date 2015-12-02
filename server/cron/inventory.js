@@ -2,7 +2,7 @@ SyncedCron.add({
     name: 'Calculate available inventory',
     schedule: function(parser) {
         // parser is a later.parse object
-        return parser.text('every 10 minutes');
+        return parser.text('every 2 minutes');
     },
     job: function() {
         var inventory = Inventory.find().fetch();
@@ -13,7 +13,10 @@ SyncedCron.add({
             var size = Sizes.findOne({_id : item.size._id});
             var weight = size.weight;
             var available = Math.floor(max/weight);
-            Inventory.update({_id : item._id}, {$set : {available : available}});
+            //Perform the update if the value has changed
+            if(item.available != available){
+                Inventory.update({_id : item._id}, {$set : {available : available}});    
+            }
         });
     }
 });
