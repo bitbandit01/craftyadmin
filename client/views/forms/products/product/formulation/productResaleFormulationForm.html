@@ -1,0 +1,18 @@
+<template name="productResaleFormulationForm">
+    <form name="productResaleFormulationForm" id="productResaleFormulationForm">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="ingredient">Material: </label>
+                    <select name="ingredient" class="form-control">
+                        <option disabled selected>Select One</option>
+                        {{#each ingredients}}
+                            <option value="{{value}}">{{label}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary pull-right">Submit</button>
+    </form>
+</template>

@@ -1,0 +1,18 @@
+<template name="receiveStockForm">
+    <form name="receiveStockForm" id="receiveStockForm" method="POST" action="#">
+        <div class="form-group">
+            <label for="material">Material:</label>
+            <select name="material" class="form-control">
+                <option disabled selected>Select One</option>
+                {{#each materials}}
+                <option value="{{code}}">{{name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="qty">{{inventoryType}} Received:</label>
+            <input name="qty" type="text" length="4" class="form-control" />
+        </div>
+        <button class="btn btn-primary">Save</button>
+    </form>
+</template>

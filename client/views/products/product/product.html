@@ -1,0 +1,226 @@
+<template name="product"> 
+  {{#if Template.subscriptionsReady }}
+    {{# with product}} 
+      {{#if checkFormulationError }}
+            <div class="alert alert-warning"><b>Warning!</b> Product has no formulation assigned.  Inventory cannot be calculated.</div>
+      {{/if}}
+      {{#if checkInventoryError }}
+                <div class="alert alert-warning"><b>Warning!</b> Product has no sizes assigned.</div>
+      {{/if}}
+      <h1>{{name}}</h1>
+      <h4>{{code}}</h4>
+
+      <div class="well">
+          <p>CONTAINS 
+          {{ allergenList }}
+          </p>
+          <p> 
+          {{#each hcodes}}
+            {{#with hCodeCode this}}{{code}} - {{description}}<br />{{/with}}
+          {{/each}}
+          </p>
+          <p> 
+          {{#each pictograms}}
+            {{#with pictogramImg this}}<img src="{{src}}" width="30" /> {{/with}}
+          {{/each}}
+          </p>
+      </div>
+    
+      <hr />
+
+      <div class="row">
+        <div class="col-md-2">            
+            <button id="productInfo" class="btn btn-primary btn-block product-nav">Basic Information</button>
+            <button id="allergens" class="btn btn-primary btn-block product-nav">Allergens</button>
+            <button id="hcodes" class="btn btn-primary btn-block product-nav">H-Codes</button>
+            <button id="pcodes" class="btn btn-primary btn-block product-nav">P-Codes</button>
+            <button id="pictograms" class="btn btn-primary btn-block product-nav">Pictograms</button>
+            <button id="productSizes" class="btn btn-primary btn-block product-nav">Sizes</button>
+            <button id="productFormulation" class="btn btn-primary btn-block product-nav">Formulation</button>
+            <button id="craftyFragrancesProduct" class="btn btn-primary btn-block product-nav">Crafty Fragrances</button>
+            <button class="btn btn-primary btn-block product-nav" disabled>e-Bay</button>
+            <button class="btn btn-primary btn-block product-nav" disabled>Amazon</button>
+        </div>
+        <div class="col-md-10">
+            {{> UI.dynamic template=currentTemplate}}
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          {{> productInventory }}
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+            <h3>Product History</h3>
+            {{> auditTrail }}
+        </div>
+      </div>
+    {{/with}}
+  {{else}}
+    {{> loading }}
+  {{/if}}
+</template>
+
+<template name="productInfo">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Product Information</h3>
+        </div>
+        <div class="panel-body">
+            {{> productInfoForm}}
+            <b>Product Type :</b> {{productType}}
+        </div>
+    </div>
+</template>
+
+<template name="allergens">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Allergens</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                  <form id="allergens-form">
+                    {{#each allergens}}
+                    <div class="col-md-6">
+                      <input type="checkbox" name="allergens[]" value="{{_id}}" {{isChecked _id ../..}} />
+                      <label for="allergens[]">{{name}}</label>
+                    </div>
+                    {{/each}}
+                  </form>
+                </div>  
+                </div>
+                <div class="row">
+                <div class="col-md-12">
+                  <a href="#" class="btn btn-primary pull-right">Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="hcodes">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Health &amp; Safety</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <form id="hcodes-form">
+              {{#each hcodes}}
+                  <div class="form-group">
+                      <input type="checkbox" name="hcodes[]" value="{{_id}}" {{isChecked _id ../..}} />
+                      <label for="{{_id}}">{{code}} - {{description}}</label>
+                  </div>
+              {{/each}}
+              </form>
+            </div>
+          </div>  
+          <div class="row">
+            <div class="col-md-12">
+              <a href="#" class="btn btn-primary pull-right">Save</a>
+            </div>
+          </div>
+        </div>
+    </div>
+</template>
+
+<template name="pictograms">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Pictograms</h3>
+        </div>
+        <div class="panel-body">
+            <form id="pictograms-form">
+                {{#each pictograms}}
+                <label class="checkbox-inline" for="{{_id}}" style="display:inline-block; text-align:center; margin-bottom: 16px;"><img src="{{src}}" width="80">
+                  <input type="checkbox" name="pictograms[]" value="{{_id}}" {{isChecked _id ../..}} />
+                </label>
+                {{/each}}
+            </form>
+            <a href="#" class="btn btn-primary pull-right">Save</a>
+        </div>
+    </div>
+</template>
+
+<template name="productSizes">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Product Sizes</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>SKU</th><th>Size</th><th>Barcode</th><th>Edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each inventory}}
+                  <tr>
+                    <td>{{sku}}</td><td>{{size.description}}</td>
+                    <td><input type="text" class="form-control" value="{{gtin13}}" /></td>
+                    <td><button class="btn btn-primary">Save</button></td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+            </table>
+            <h3>Add Product Size</h3>
+            {{> productInventoryForm}}
+        </div>
+    </div>
+</template>
+
+<template name="craftyFragrancesProduct">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Crafty Fragrances Integration</h3>
+        </div>
+        <div class="panel-body">
+            {{> craftyFragrancesProductForm }}
+        </div>
+    </div>
+    <h3>Variations</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>SKU</th><th>Size</th><th>Price</th><th>Make Available?</th><th>Save</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each variations}}
+                    <tr>
+                        <td>{{sku}}</td><td>{{size.description}}</td><td><input type="text" name="price" value="{{formatMoney channels.craftyFragrances.price}}" /></td>
+                        <td><input name="available" type="checkbox" value="available" {{variationAvailable}} /></td>
+                        <td><button class="btn btn-primary" id="updateVariation">Save</button></td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>
+
+<template name="auditTrail">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Timestamp</th><th>Event</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each auditTrail }}
+                <tr>
+                    <td>{{timestamp}}</td><td>{{event}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</template>

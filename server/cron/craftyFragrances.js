@@ -2,10 +2,10 @@ SyncedCron.add({
     name: 'Sync product data with Crafty Fragrances',
     schedule: function(parser) {
         // parser is a later.parse object
-        return parser.text('every 2 minutes');
+        return parser.text('every 30 minutes');
     },
     job: function() {
-        var sinceLast = moment().subtract(2, 'minutes').format();
+        var sinceLast = moment().subtract(30, 'minutes').format();
         //Get products which have been updated in the last 35 minutes
         var products = Products.find({updatedAt : {$gte : new Date(sinceLast)}}).fetch();
         var api = new craftyAPI();

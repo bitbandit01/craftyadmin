@@ -1,0 +1,20 @@
+<template name="formulationTable">
+  <h4>Created: {{formatDate date}}</h4>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Ingredient</th><th>Qty</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each ingredients }}
+        <tr>
+          <td>{{name}}</td><td>{{ formatQty }}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <h4>Instructions</h4>
+  {{instructions}}
+  <hr />
+</template>

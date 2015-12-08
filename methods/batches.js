@@ -1,17 +1,22 @@
 //Client Side Methods
 Meteor.methods({
-    formulationMaxAvailable : function(product){
+    formulationMaxAvailable : function(code){
         //Determines the maximum qty of a product that can be produced
         //based on its currently set formulation
-        var formulation = Formulations.findOne({product: product});
+        var formulation = Formulations.findOne({product: code});
+        if(!formulation){
+            return 0;
+        }
         var available = [];
         //Calculate whats available for each particular ingredient
         _.each(formulation.ingredients, function(ingredient){
-            var material = Materials.findOne(ingredient._id);
+            var material = Materials.findOne({code : ingredient.code});
             //convert to grams
-            var inventory = material.inventory*1000;
+            var inventory = material.inventory;
+            console.log(inventory);
             //grams for 1Kg
-            var requirement = (ingredient.qty/100)*1000;
+            var requirement = (ingredient.qty/100);
+            console.log(requirement);
             //round down
             available.push(Math.floor(inventory/requirement));
         });

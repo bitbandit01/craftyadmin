@@ -12,25 +12,26 @@
           <tbody>
           {{#each products}}
             <tr>
-              <td><a href="{{pathFor 'aProduct' id=_id }}">{{name}}</a></td><td>{{code}}</td>
+              <td><a href="{{pathFor 'aProduct' code=code }}">{{name}}</a></td><td>{{code}}</td>
             </tr>
           {{/each}}
           </tbody>
         </table>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-12">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  <h3>New Product</h3>
+              </div>
+              <div class="panel-body">
+                  {{> newProductForm }}
+              </div>
+          </div>    
+      </div>
+    </div>     
   {{else}}
     {{> loading }}
   {{/if}}
-  
-  {{> newProductForm }}
-</template>
-
-<template name="newProductForm">
-  <h3>Add A Product</h3>
-  <div class="row">
-    <div class="col-md-6">
-      {{> quickForm collection="Products" type="insert" id="addProductForm" buttonContent="Save" }}
-    </div>
-  </div>
 </template>

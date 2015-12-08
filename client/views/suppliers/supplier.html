@@ -1,7 +1,44 @@
 <template name="supplier">
   {{#with supplier}}
     <h1>{{name}}</h1>
+    <span class="glyphicon glyphicon-globe"></span> <a href="{{website}}" target="_new">{{website}}</a>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Contacts</h2>
+            {{#each contacts}}
+                <div class="well col-md-6">
+                    <h4>{{name}}</h4>
+                    <p>
+                        <span class="glyphicon glyphicon-envelope"></span> {{email}}
+                    </p>
+                    <p>
+                        <span class="glyphicon glyphicon-earphone"></span> {{telephone}}
+                    </p>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Addresses</h2>
+            {{#each addresses}}
+                <div class="well col-md-6">
+                    {{address1}}<br />
+                    {{#if address2}}
+                        {{address2}}<br />
+                    {{/if}}
+                    {{#if address3}}
+                        {{address3}}<br />
+                    {{/if}}
+                    {{town}}<br />
+                    {{#if county}}
+                        {{county}}<br />
+                    {{/if}}            
+                    {{postcode}}<br />
+                    {{country}}
+                </div>
+            {{/each}}
+        </div>
+    </div>
   {{/with}}
-  
-  {{> quickForm collection="Suppliers" doc=supplier id="editSupplierForm" type="update" }}
 </template>

@@ -9,7 +9,7 @@ SyncedCron.add({
         _.each(inventory, function(item){
             //Async method call we need to wait for result of
             var callSync= Meteor.wrapAsync(Meteor.call);
-            var max = callSync('formulationMaxAvailable', item.product._id);
+            var max = callSync('formulationMaxAvailable', item.product.code);
             var size = Sizes.findOne({_id : item.size._id});
             var weight = size.weight;
             var available = Math.floor(max/weight);

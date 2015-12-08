@@ -1,0 +1,17 @@
+<template name="productManufacturedFormulation">
+  <div class="panel panel-default">
+      <div class="panel-heading">Formulation for 100Kg:</div>
+      <div class="panel-body">
+          {{#with currentFormulation}}
+            {{> formulationTable }}
+          {{/with}}
+      </div>
+  </div>
+  <h3>New Formulation (for 100Kg):</h3>
+    {{> productManufacturedFormulationForm }}
+  <hr />
+  <h3>Formulation History</h3>
+  {{#each previousFormulations}}
+    {{> formulationTable }}
+  {{/each}}
+</template>

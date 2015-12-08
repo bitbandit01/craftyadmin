@@ -7,7 +7,7 @@ Schema.craftyFragrancesProduct = new SimpleSchema({
        type : String,
        autoValue : function(){
            if(this.isInsert){
-               return this.field("name");
+               return this.field("name").val;
            }
        }
    },

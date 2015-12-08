@@ -1,0 +1,33 @@
+<template name="materialSupplierForm">
+    <form name="materialSupplierForm" id="materialSupplierForm" method="POST">
+        <div class="form-group">
+            <label for="supplier">Supplier: </label>
+            <select class="form-control" name="supplier">
+                <option selected disabled>Select One</option>
+                {{#each suppliers}}
+                    <option value="{{value}}">{{label}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <fieldset>
+            <legend>Pack Size</legend>
+            <div class="form-group">
+                <label for="code">Supplier Product Code: </label>
+                <input type="text" class="form-control" name="code" />
+            </div>
+            <div class="form-group">
+                <label for="code">Pack Description: </label>
+                <input type="text" class="form-control" name="description" />
+            </div>
+            <div class="form-group">
+                <label for="units">{{inventoryType}} Per Pack: </label>
+                <input type="text" class="form-control" name="units" />
+            </div>
+            <div class="form-group">
+                <label for="minQty">Minimum Order Qty (Packs): </label>
+                <input type="text" class="form-control" name="minQty" />
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-primary pull-right">Save</button>
+    </form>
+</template>

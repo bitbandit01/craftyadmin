@@ -8,9 +8,7 @@ fourseven:scss
 anti:fake
 dburles:factory
 random
-meteorhacks:ssr
 msavin:mongol
-aldeed:autoform
 aldeed:collection2
 twbs:bootstrap
 templates:tabs
@@ -19,8 +17,6 @@ meteorhacks:npm
 
 npm-container
 mrt:moment
-sanjo:jasmine
-velocity:html-reporter
 kadira:flow-router
 kadira:blaze-layout
 arillo:flow-router-helpers
@@ -28,7 +24,6 @@ sacha:spin
 accounts-base
 accounts-ui
 accounts-password
-velocity:helpers
 reactive-var
 percolate:synced-cron
 kadira:debug
@@ -48,3 +43,6 @@ ejson
 spacebars
 check
 risul:accounting
+themeteorchef:jquery-validation
+jt6562:bootstrap-3-switch
+momentjs:moment

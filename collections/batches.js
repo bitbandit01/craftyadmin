@@ -53,30 +53,9 @@ Schema.BatchSchema = new SimpleSchema({
     'ingredients.$._id' : {
         type : String,
         regEx : SimpleSchema.RegEx.Id,
-        autoform : {
-            afFieldInput : {
-                options : function(){
-                    var options = [];
-                    Materials.find().fetch().forEach(function(record){
-                        options.push({
-                            label : record.name, value : record._id
-                        })
-                    });
-                    return options;
-                }
-            }
-        }
     },
     'ingredients.$.name' : {
-        type : String,
-        autoform : {
-            omit : true
-        },
-        autoValue : function(){
-            var id = this.siblingField('_id').value;
-            var record = Materials.findOne(id);
-            return record.name;
-        },
+        type : String
     },
     'ingredients.$.qty' : {
         type : Number,
@@ -112,18 +91,12 @@ Schema.BatchSchema = new SimpleSchema({
         optional : true
     },
     'qcNotes.$.text' : {
-        type : String,
-        autoform : {
-            label: 'Note'
-        }
+        type : String
     },
     'qcNotes.$.timestamp' : {
         type : Date,
         autoValue : function(){
             return new Date();
-        },
-        autoform : {
-            omit : true
         }
     },
 });

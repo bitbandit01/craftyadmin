@@ -1,0 +1,17 @@
+<template name="craftyFragrancesProductForm">
+    <form name="craftyFragrancesProduct" id="craftyFragrancesProductForm">
+        <div class="form-group">
+            <label for="publish">Publish:</label>
+            <input type="checkbox" name="publish" value="publish" {{publish}}  />
+        </div>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name" value="{{name}}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="name">Description:</label>
+            <textarea name="description" class="form-control">{{description}}</textarea>
+        </div>
+        <button class="btn btn-primary pull-right">Save</button>
+    </form>
+</template>

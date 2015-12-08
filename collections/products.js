@@ -8,41 +8,40 @@ var productSchema = new SimpleSchema({
         type : String,
         unique : true
     },
+    productType : {
+        type : String,
+        allowedValues : ['Manufactured', 'Resale', 'Composite']
+    },
     updatedAt : {
         type : Date,
         autoValue : function(){
             return new Date();
-        },
-        autoform : {
-            omit : true
         }
     },
     allergens : {
         type : [String],
-        optional : true,
-        autoform : {
-            omit : true
-        }
+        optional : true
     },
     hcodes : {
         type : [String],
-        optional : true,
-        autoform : {
-            omit : true
-        }
+        optional : true
     },
     pictograms : {
         type : [String],
-        optional : true,
-        autoform : {
-            omit : true
-        }
+        optional : true
+    },
+    auditTrail : {
+        type : [Object],
+        defaultValue : []
+    },
+    'auditTrail.$.timestamp' : {
+        type : Date
+    },
+    'auditTrail.$.event' : {
+        type : String
     },
     channels : {
         type : Object,
-        autoform :{
-            omit : true
-        }
     },
     'channels.craftyFragrances' : {
         type : Schema.craftyFragrancesProduct

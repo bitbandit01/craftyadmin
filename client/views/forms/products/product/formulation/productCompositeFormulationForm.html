@@ -1,0 +1,47 @@
+<template name="productCompositeFormulationForm">
+    <form name="productCompositeFormulationForm" id="productCompositeFormulationForm">
+        <div class="row">
+            <div class="col-sm-12">
+                {{#each formRows }}
+                    <div class="form-group">
+                        <label for="product{{this}}">Product {{this}}: </label>
+                        <select name="product{{this}}" class="form-control product-picker">
+                            <option disabled selected>Select One</option>
+                            {{#each products}}
+                                <option value="{{value}}">{{label}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="size{{this}}">Size: </label>
+                        <select name="size{{this}}" class="form-control">
+                            <option disabled selected>Select One</option>
+                            {{#each sizes}}
+                                <option value="{{value}}">{{label}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="qty{{this}}">Qty: </label>
+                        <input type="text" name="qty{{this}}" class="form-control"/>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <button class="btn btn-success" id="addFormRow">Add Ingredient</button>
+                <button class="btn btn-danger" id="removeFormRow">Remove Ingredient</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="instructions">Instructions: </label>
+                    <textarea name="instructions" class="form-control" rows="4"></textarea>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary pull-right">Submit</button>
+    </form>
+</template>

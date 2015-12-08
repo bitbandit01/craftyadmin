@@ -1,0 +1,31 @@
+<template name="newBatchForm">
+    <form name="newBatchForm" id="newBatchForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="product">Product:</label>
+                <select name="product" class="form-control">
+                    <option selected disabled>Select One</option>
+                    {{#each products}}
+                        <option value="{{value}}">{{label}}</option>
+                    {{/each}}
+                 </select>
+            </div>
+            <h2>Available: {{available}}</h2>
+            <div class="form-group">
+                <label for="batchSize">Batch Size:</label>
+                <input type="text" name="batchSize" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary pull-right">Start Batch</button>
+    </form>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Formulation For {{formulationFor}}Kg</h2>
+            {{#with formulationAdjusted }}
+                {{> formulationTable }}
+            {{/with}}
+        </div>
+    </div>
+</template>

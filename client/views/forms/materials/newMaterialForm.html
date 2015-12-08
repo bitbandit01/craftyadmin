@@ -1,0 +1,21 @@
+<template name="newMaterialForm">
+    <form name="newMaterialForm" id="newMaterialForm" method="POST">
+        <div class="form-group">
+            <label for="name">Name: </label>
+            <input type="text" class="form-control" name="name" />
+        </div>
+        <div class="form-group">
+            <label for="code">Code: </label>
+            <input type="text" class="form-control" name="code" />
+        </div>
+        <div class="form-group">
+            <label for="inventoryType">Record Inventory In: </label>
+            <select class="form-control" name="inventoryType">
+                <option selected disabled>Select One</option>
+                <option value="Kg">Kg</option>
+                <option value="Units">Units</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary pull-right">Submit</button>
+    </form>
+</template>

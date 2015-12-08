@@ -1,34 +1,9 @@
 <template name="newBatch">
   {{#if Template.subscriptionsReady }}
       <h1>New Batch</h1>
-      {{#autoForm collection="Batches" name="newBatchForm" id="newBatchForm" type="method" meteormethod="startNewBatch" }}
-      <div class="row">
-        <div class="col-md-12">
-          {{> afQuickField name="product" id="product-select" options=products}}
-          <h2>Available: {{formatKg available}}</h2>
-          {{> afQuickField name="batchSize" id="batchSize" }}
-        </div>
-      </div>
-      {{> batchFormulation }}
-      <div class="row">
-        <div class="col-md-12">
-          <button type="submit" class="btn btn-primary">Start Batch</button>
-        </div>
-      </div>
-      {{/autoForm}}
+      {{> newBatchForm }}
   {{else}}
       {{> loading}}
   {{/if}}
   
-</template>
-
-<template name="batchFormulation">
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Formulation For {{formulationFor}}Kg</h2>
-      {{#with formulationAdjusted }}
-        {{> formulationTable }}
-      {{/with}}
-    </div>
-  </div>
 </template>

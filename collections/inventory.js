@@ -16,6 +16,9 @@ Inventory.attachSchema(new SimpleSchema({
     "product.code" : {
         type : String,
     },
+    "product.name" : {
+        type : String
+    },
     size  : {
         type : Object,
     },

@@ -3,21 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Receive Inventory</h1>
-                <form name="receiveInventory" id="receiveInventory" method="POST" action="#">
-                    <div class="form-group">
-                        <label for="material">Material:</label>
-                        <select name="material" class="form-control">
-                            {{#each materials}}
-                            <option value="{{_id}}">{{name}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="qty">Qty Received:</label>
-                        <input name="qty" type="text" length="4" class="form-control" />
-                    </div>
-                    <button class="btn btn-primary">Save</button>
-                </form>
+                {{> receiveStockForm}}
             </div>
         </div>
     {{else}}

@@ -1,17 +1,14 @@
 Suppliers = new Meteor.Collection('suppliers');
 
 Schema.AddressSchema = new SimpleSchema({
-  description : {
+  address1 : {
     type : String,
   },
-  line1 : {
-    type : String,
-  },
-  line2 : {
+  address2 : {
     type : String,
     optional : true
   },
-  line3 : {
+  address3 : {
     type : String,
     optional : true
   },
@@ -24,6 +21,7 @@ Schema.AddressSchema = new SimpleSchema({
   },
   postcode : {
     type : String,
+    optional :true
   },
   country : {
     type : String,
@@ -43,24 +41,19 @@ Schema.SupplierSchema = new SimpleSchema({
     type : String,
     optional : true
   },
-  telephone : {
-    type : [String],
-    optional : true
+  contacts : {
+      type : [Object]
   },
-  email : {
-    type : [Object],
-    optional : true
+  "contacts.$.name" : {
+      type : String
   },
-  "email.$.name" : {
-    type: String,               
+  "contacts.$.email" : {
+      type : String,
+      optional : true
   },
-  "email.$.address" : {
-    type : String,
-    regEx : SimpleSchema.RegEx.Email
-  },
-  "email.$.department" : {
-    type : String,
-    optional : true
+  "contacts.$.telephone" : {
+      type : String,
+      optional : true
   },
   addresses : {
     type : [Schema.AddressSchema],
