@@ -109,353 +109,365 @@ Meteor.startup(function () {
     }
 
     console.log('Loading default fixtures');
-
-    if (!Sizes.find().count()) {
-        var sizes = [
-            {
-                'code' : 101,
-                'description' : '100g',
-                'weight' : 100
-            },
-            {
-                'code' : 102,
-                'description' : '1Kg',
-                'weight' : 1000
-            },
-            {
-                'code' : 103,
-                'description' : '5Kg',
-                'weight' : 5000
-            },
-            {
-                'code' : 104,
-                'description' : '25Kg',
-                'weight' : 25000
-            }
-        ];
-
-        _.each(sizes, function(size){
-            Sizes.insert(size);
-        });
-    }
-
-    var hundredgram = Sizes.findOne({'description' : '100g'});
-    var onekg = Sizes.findOne({'description' : '1Kg'});
-    var fivekg = Sizes.findOne({'description' : '5Kg'});
-    var twentyfivekg = Sizes.findOne({'description' : '25Kg'});
-
-    if (!Products.find().count()) {
-        var products = [
-            {
-                name : "Product One",
-                code : "1001",
-                productType : "Manufactured",
-                allergens : [],
-                hcodes : [],
-                pictograms : [],
-                channels : {
-                    craftyFragrances : {
-                        publish : false,
-                        name : "Product One",
-                        description : "Default description"
-                    }
-                }
-            },
-            {
-                name : "Product Two",
-                code : "1002",
-                productType : "Resale",
-                allergens : [],
-                hcodes : [],
-                pictograms : [],
-                channels : {
-                    craftyFragrances : {
-                        publish : false,
-                        name : "Product Two",
-                        description : "Default description"
-                    }
-                }
-            }
-        ];
-
-        _.each(products, function(product){
-            Products.insert(product);
-        });
-
-    }
-
-    var productone = Products.findOne({code : '1001'});
-    var producttwo = Products.findOne({code : '1002'});
-
-
-    if (!Inventory.find().count()) {
-        var inventory = [
-            {
-                'sku' : productone.code + '-' + onekg.code,
-                'product' : {
-                    '_id' : productone._id,
-                    'code' : productone.code,
-                    'name' : productone.name
-                },
-                'size' : {
-                    '_id' : onekg._id,
-                    'description' : onekg.description
-                },
-                'inStock' : 0,
-                'available' : 0,
-                'channels' : {
-                    craftyFragrances : {
-                        product : productone.code,
-                        available : false,
-                        price : 0
-                    }
-                }
-            },
-            {
-                'sku' : productone.code+'-'+fivekg.code,
-                'product' : {
-                    '_id' : productone._id,
-                    'code' : productone.code,
-                    'name' : productone.name
-                },
-                'size' : {
-                    '_id' : fivekg._id,
-                    'description' : fivekg.description
-                },
-                'inStock' : 0,
-                'available' : 0,
-                'channels' : {
-                    craftyFragrances : {
-                        product : productone.code,
-                        available : false,
-                        price : 0
-                    }
-                }
-            },
-            {
-                'sku' : producttwo.code+'-'+fivekg.code,
-                'product' : {
-                    '_id' : producttwo._id,
-                    'code' : producttwo.code,
-                    'name' : producttwo.name
-                },
-                'size' : {
-                    '_id' : fivekg._id,
-                    'description' : fivekg.description
-                },
-                'inStock' : 0,
-                'available' : 0,
-                'channels' : {
-                    craftyFragrances : {
-                        product : producttwo.code,
-                        available : false,
-                        price : 0
-                    }
-                }
-            },
-            {
-                'sku' : producttwo.code+'-'+hundredgram.code,
-                'product' : {
-                    '_id' : producttwo._id,
-                    'code' : producttwo.code,
-                    'name' : producttwo.name
-                },
-                'size' : {
-                    '_id' : hundredgram._id,
-                    'description' : hundredgram.description
-                },
-                'inStock' : 0,
-                'available' : 0,
-                'channels' : {
-                    craftyFragrances : {
-                        product : producttwo.code,
-                        available : false,
-                        price : 0
-                    }
-                }
-            },
-        ];
-
-        _.each(inventory, function(item){
-            Inventory.insert(item);
-        });
-    }
-
-    if (!Suppliers.find().count()) {
-        var suppliers = [
-            {
-                'name' : 'Supplier One',
-                'website' : 'http://www.google.com',
-                'contacts' : [
-                    {
-                        'name' : 'A. Person',
-                        'email' : 'a.person@company.com',
-                        'telephone' : ''
-                    }
-                ],
-                'addresses' : [
-                    {
-                        'address1' : '10 A Street',
-                        'address2' : 'The Road',
-                        'town' : 'Big Town',
-                        'county' : 'Acounty',
-                        'postcode' : 'AA10 1BB',
-                        'country' : 'United Kingdom'
-                    }
-                ]
-            },
-            {
-                'name' : 'Supplier Two',
-                'website' : 'http://www.google.com',
-                'contacts' : [
-                    {
-                        'name' : 'A. Person',
-                        'email' : '',
-                        'telephone' : '02894 465123'
-                    }
-                ],
-                'addresses' : [
-                    {
-                        'description' : 'Billing',
-                        'address1' : '99 A Street',
-                        'address2' : 'The Lane',
-                        'town' : 'Small Town',
-                        'county' : 'Acounty',
-                        'postcode' : 'AA10 2FF',
-                        'country' : 'United Kingdom'
-                    }
-                ]
-            }
-        ];
-
-        _.each(suppliers, function(supplier){
-            Suppliers.insert(supplier);
-        });
-        var supplierone = Suppliers.findOne({'name' : 'Supplier One'});
-        var suppliertwo = Suppliers.findOne({'name' : 'Supplier Two'});
-    }
-
-    if (!Materials.find().count()) {
-        var materials = [
-            {
-                'name' : 'Material One',
-                'code' : '1001',
-                'allergens' : [],
-                'hcodes' : [],
-                'pictograms' : [],
-                'inventory' : 50000,
-                'inventoryType' : 'Kg',
-                'suppliers' : [
-                    {
-                        '_id' : supplierone._id,
-                        'name' : supplierone.name,
-                        'sizes' : [
-                            {
-                                '_id' : twentyfivekg._id,
-                                'description' : twentyfivekg.description,
-                                'code' : '',
-                                'units' : 1,
-                                'minQty' : 1
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                'name' : 'Material Two',
-                'code' : '1002',
-                'allergens' : [],
-                'hcodes' : [],
-                'pictograms' : [],
-                'inventory' : 100000,
-                'inventoryType' : 'Kg',
-                'suppliers' : [
-                    {
-                        '_id' : suppliertwo._id,
-                        'name' : suppliertwo.name,
-                        'code' : 'A5001',
-                        'sizes' : [
-                            {
-                                '_id' : fivekg._id,
-                                'description' : fivekg.description,
-                                'code' : '',
-                                'units' : 1,
-                                'minQty' : 4
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                'name' : 'Material Three',
-                'code' : '1003',
-                'allergens' : [],
-                'hcodes' : [],
-                'pictograms' : [],
-                'inventory' : 250,
-                'inventoryType' : 'Units',
-                'suppliers' : [
-                    {
-                        '_id' : supplierone._id,
-                        'name' : supplierone.name,
-                        'code' : 'A5001',
-                        'sizes' : [
-                            {
-                                '_id' : twentyfivekg._id,
-                                'description' : twentyfivekg.description,
-                                'code' : '',
-                                'units' : 1,
-                                'minQty' : 5
-                            }
-                        ]
-                    }
-                ]
-            }
-        ];
-
-        _.each(materials, function(material){
-            Materials.insert(material);
-        });
-
+    
+    //Reset the database for casperJS Mirror only
+    if(process.env.IS_MIRROR){        
+        if(Sizes.find().count()){ Sizes.remove(); }
+        if(Products.find().count()){ Products.remove(); }
+        if(Inventory.find().count()){ Inventory.remove(); }
+        if(Materials.find().count()){ Materials.remove(); }
+        if(Formulations.find().count()){ Formulations.remove(); }
+        if(Suppliers.find().count()){ Suppliers.remove(); }
+        if(Purchases.find().count()){ Purchases.remove(); }
+        if(Batches.find().count()){ Batches.remove(); }
     }
     
-    var materialone = Materials.findOne({code : '1001'});
-    var materialtwo = Materials.findOne({code : '1002'});
-    var materialthree = Materials.findOne({code : '1003'});
+//     if (!Sizes.find().count()) {
+//         var sizes = [
+//             {
+//                 'code' : 101,
+//                 'description' : '100g',
+//                 'weight' : 100
+//             },
+//             {
+//                 'code' : 102,
+//                 'description' : '1Kg',
+//                 'weight' : 1000
+//             },
+//             {
+//                 'code' : 103,
+//                 'description' : '5Kg',
+//                 'weight' : 5000
+//             },
+//             {
+//                 'code' : 104,
+//                 'description' : '25Kg',
+//                 'weight' : 25000
+//             }
+//         ];
 
-    if (!Formulations.find().count()) {
-        var formulations = [
-            {
-                'product' : productone.code,
-                'ingredients' : [
-                    {
-                        'code' : materialone.code,
-                        'name' : materialone.name,
-                        'qty' : 70000
-                    },
-                    {
-                        'code' : materialtwo.code,
-                        'name' : materialtwo.name,
-                        'qty' : 30000
-                    },
-                ]
-            },
-            {
-                'product' : producttwo.code,
-                'ingredients' : [
-                    {
-                        'code' : materialthree.code,
-                        'name' : materialthree.name,
-                        'qty' : 1
-                    }
-                ]
-            },
-        ];
+//         _.each(sizes, function(size){
+//             Sizes.insert(size);
+//         });
+//     }
 
-        _.each(formulations, function(formulation){
-            Formulations.insert(formulation);
-        });
-    }
+//     var hundredgram = Sizes.findOne({'description' : '100g'});
+//     var onekg = Sizes.findOne({'description' : '1Kg'});
+//     var fivekg = Sizes.findOne({'description' : '5Kg'});
+//     var twentyfivekg = Sizes.findOne({'description' : '25Kg'});
+
+//     if (!Products.find().count()) {
+//         var products = [
+//             {
+//                 name : "Product One",
+//                 code : "1001",
+//                 productType : "Manufactured",
+//                 allergens : [],
+//                 hcodes : [],
+//                 pictograms : [],
+//                 channels : {
+//                     craftyFragrances : {
+//                         publish : false,
+//                         name : "Product One",
+//                         description : "Default description"
+//                     }
+//                 }
+//             },
+//             {
+//                 name : "Product Two",
+//                 code : "1002",
+//                 productType : "Resale",
+//                 allergens : [],
+//                 hcodes : [],
+//                 pictograms : [],
+//                 channels : {
+//                     craftyFragrances : {
+//                         publish : false,
+//                         name : "Product Two",
+//                         description : "Default description"
+//                     }
+//                 }
+//             }
+//         ];
+
+//         _.each(products, function(product){
+//             Products.insert(product);
+//         });
+
+//     }
+
+//     var productone = Products.findOne({code : '1001'});
+//     var producttwo = Products.findOne({code : '1002'});
+
+
+//     if (!Inventory.find().count()) {
+//         var inventory = [
+//             {
+//                 'sku' : productone.code + '-' + onekg.code,
+//                 'product' : {
+//                     '_id' : productone._id,
+//                     'code' : productone.code,
+//                     'name' : productone.name
+//                 },
+//                 'size' : {
+//                     '_id' : onekg._id,
+//                     'description' : onekg.description
+//                 },
+//                 'inStock' : 0,
+//                 'available' : 0,
+//                 'channels' : {
+//                     craftyFragrances : {
+//                         product : productone.code,
+//                         available : false,
+//                         price : 0
+//                     }
+//                 }
+//             },
+//             {
+//                 'sku' : productone.code+'-'+fivekg.code,
+//                 'product' : {
+//                     '_id' : productone._id,
+//                     'code' : productone.code,
+//                     'name' : productone.name
+//                 },
+//                 'size' : {
+//                     '_id' : fivekg._id,
+//                     'description' : fivekg.description
+//                 },
+//                 'inStock' : 0,
+//                 'available' : 0,
+//                 'channels' : {
+//                     craftyFragrances : {
+//                         product : productone.code,
+//                         available : false,
+//                         price : 0
+//                     }
+//                 }
+//             },
+//             {
+//                 'sku' : producttwo.code+'-'+fivekg.code,
+//                 'product' : {
+//                     '_id' : producttwo._id,
+//                     'code' : producttwo.code,
+//                     'name' : producttwo.name
+//                 },
+//                 'size' : {
+//                     '_id' : fivekg._id,
+//                     'description' : fivekg.description
+//                 },
+//                 'inStock' : 0,
+//                 'available' : 0,
+//                 'channels' : {
+//                     craftyFragrances : {
+//                         product : producttwo.code,
+//                         available : false,
+//                         price : 0
+//                     }
+//                 }
+//             },
+//             {
+//                 'sku' : producttwo.code+'-'+hundredgram.code,
+//                 'product' : {
+//                     '_id' : producttwo._id,
+//                     'code' : producttwo.code,
+//                     'name' : producttwo.name
+//                 },
+//                 'size' : {
+//                     '_id' : hundredgram._id,
+//                     'description' : hundredgram.description
+//                 },
+//                 'inStock' : 0,
+//                 'available' : 0,
+//                 'channels' : {
+//                     craftyFragrances : {
+//                         product : producttwo.code,
+//                         available : false,
+//                         price : 0
+//                     }
+//                 }
+//             },
+//         ];
+
+//         _.each(inventory, function(item){
+//             Inventory.insert(item);
+//         });
+//     }
+
+//     if (!Suppliers.find().count()) {
+//         var suppliers = [
+//             {
+//                 'name' : 'Supplier One',
+//                 'website' : 'http://www.google.com',
+//                 'contacts' : [
+//                     {
+//                         'name' : 'A. Person',
+//                         'email' : 'a.person@company.com',
+//                         'telephone' : ''
+//                     }
+//                 ],
+//                 'addresses' : [
+//                     {
+//                         'address1' : '10 A Street',
+//                         'address2' : 'The Road',
+//                         'town' : 'Big Town',
+//                         'county' : 'Acounty',
+//                         'postcode' : 'AA10 1BB',
+//                         'country' : 'United Kingdom'
+//                     }
+//                 ]
+//             },
+//             {
+//                 'name' : 'Supplier Two',
+//                 'website' : 'http://www.google.com',
+//                 'contacts' : [
+//                     {
+//                         'name' : 'A. Person',
+//                         'email' : '',
+//                         'telephone' : '02894 465123'
+//                     }
+//                 ],
+//                 'addresses' : [
+//                     {
+//                         'description' : 'Billing',
+//                         'address1' : '99 A Street',
+//                         'address2' : 'The Lane',
+//                         'town' : 'Small Town',
+//                         'county' : 'Acounty',
+//                         'postcode' : 'AA10 2FF',
+//                         'country' : 'United Kingdom'
+//                     }
+//                 ]
+//             }
+//         ];
+
+//         _.each(suppliers, function(supplier){
+//             Suppliers.insert(supplier);
+//         });
+//         var supplierone = Suppliers.findOne({'name' : 'Supplier One'});
+//         var suppliertwo = Suppliers.findOne({'name' : 'Supplier Two'});
+//     }
+
+//     if (!Materials.find().count()) {
+//         var materials = [
+//             {
+//                 'name' : 'Material One',
+//                 'code' : '1001',
+//                 'allergens' : [],
+//                 'hcodes' : [],
+//                 'pictograms' : [],
+//                 'inventory' : 50000,
+//                 'inventoryType' : 'Kg',
+//                 'suppliers' : [
+//                     {
+//                         '_id' : supplierone._id,
+//                         'name' : supplierone.name,
+//                         'sizes' : [
+//                             {
+//                                 '_id' : twentyfivekg._id,
+//                                 'description' : twentyfivekg.description,
+//                                 'code' : '',
+//                                 'units' : 1,
+//                                 'minQty' : 1
+//                             }
+//                         ]
+//                     }
+//                 ]
+//             },
+//             {
+//                 'name' : 'Material Two',
+//                 'code' : '1002',
+//                 'allergens' : [],
+//                 'hcodes' : [],
+//                 'pictograms' : [],
+//                 'inventory' : 100000,
+//                 'inventoryType' : 'Kg',
+//                 'suppliers' : [
+//                     {
+//                         '_id' : suppliertwo._id,
+//                         'name' : suppliertwo.name,
+//                         'code' : 'A5001',
+//                         'sizes' : [
+//                             {
+//                                 '_id' : fivekg._id,
+//                                 'description' : fivekg.description,
+//                                 'code' : '',
+//                                 'units' : 1,
+//                                 'minQty' : 4
+//                             }
+//                         ]
+//                     }
+//                 ]
+//             },
+//             {
+//                 'name' : 'Material Three',
+//                 'code' : '1003',
+//                 'allergens' : [],
+//                 'hcodes' : [],
+//                 'pictograms' : [],
+//                 'inventory' : 250,
+//                 'inventoryType' : 'Units',
+//                 'suppliers' : [
+//                     {
+//                         '_id' : supplierone._id,
+//                         'name' : supplierone.name,
+//                         'code' : 'A5001',
+//                         'sizes' : [
+//                             {
+//                                 '_id' : twentyfivekg._id,
+//                                 'description' : twentyfivekg.description,
+//                                 'code' : '',
+//                                 'units' : 1,
+//                                 'minQty' : 5
+//                             }
+//                         ]
+//                     }
+//                 ]
+//             }
+//         ];
+
+//         _.each(materials, function(material){
+//             Materials.insert(material);
+//         });
+
+//     }
+    
+//     var materialone = Materials.findOne({code : '1001'});
+//     var materialtwo = Materials.findOne({code : '1002'});
+//     var materialthree = Materials.findOne({code : '1003'});
+
+//     if (!Formulations.find().count()) {
+//         var formulations = [
+//             {
+//                 'product' : productone.code,
+//                 'ingredients' : [
+//                     {
+//                         'code' : materialone.code,
+//                         'name' : materialone.name,
+//                         'qty' : 70000
+//                     },
+//                     {
+//                         'code' : materialtwo.code,
+//                         'name' : materialtwo.name,
+//                         'qty' : 30000
+//                     },
+//                 ]
+//             },
+//             {
+//                 'product' : producttwo.code,
+//                 'ingredients' : [
+//                     {
+//                         'code' : materialthree.code,
+//                         'name' : materialthree.name,
+//                         'qty' : 1
+//                     }
+//                 ]
+//             },
+//         ];
+
+//         _.each(formulations, function(formulation){
+//             Formulations.insert(formulation);
+//         });
+//     }
 
     console.log('Finished loading default fixtures');
 });

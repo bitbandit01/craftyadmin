@@ -67,7 +67,7 @@ Template.newBatchForm.events({
         currProduct.set(product);
         Meteor.call('formulationMaxAvailable', product, function(error, data){
             if(!error){
-                available.set(data);
+                available.set(gToKg(data));
             }else{
                 console.log(error);
                 available.set(0);
